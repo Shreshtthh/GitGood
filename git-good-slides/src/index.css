@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Manga Noir Theme */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    /* GitHub Blue */
+    --primary: 210 12% 16%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+
+    /* Soft Teal Accent */
+    --accent: 175 50% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 28 100% 47%;
+
+    --radius: 0.5rem;
+
+    /* Custom tokens */
+    --manga-border: 0 0% 100%;
+    --manga-panel-bg: 0 0% 6%;
+    --halftone-opacity: 0.03;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, .manga-title {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  /* Manga panel styles */
+  .manga-panel {
+    @apply relative border-4 border-foreground bg-manga-panel overflow-hidden;
+    box-shadow: 8px 8px 0 0 hsl(var(--foreground) / 0.1);
+  }
+
+  .manga-panel-tilted {
+    @apply manga-panel;
+    transform: rotate(-1deg);
+  }
+
+  .manga-panel-tilted-right {
+    @apply manga-panel;
+    transform: rotate(1deg);
+  }
+
+  /* Halftone background pattern */
+  .halftone-bg {
+    background-image: radial-gradient(circle, hsl(var(--foreground) / var(--halftone-opacity)) 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+
+  /* Speed lines effect */
+  .speed-lines {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--foreground) / 0.02) 2px,
+      hsl(var(--foreground) / 0.02) 4px
+    );
+  }
+
+  /* Accent glow */
+  .accent-glow {
+    text-shadow: 0 0 40px hsl(var(--accent) / 0.5);
+  }
+
+  /* Navigation regions */
+  .nav-region {
+    @apply absolute top-0 h-full w-24 z-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer;
+  }
+
+  .nav-region-left {
+    @apply nav-region left-0;
+    background: linear-gradient(90deg, hsl(var(--foreground) / 0.1), transparent);
+  }
+
+  .nav-region-right {
+    @apply nav-region right-0;
+    background: linear-gradient(-90deg, hsl(var(--foreground) / 0.1), transparent);
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 2px hsl(var(--foreground));
+    paint-order: stroke fill;
+  }
+
+  .manga-shadow {
+    box-shadow: 6px 6px 0 0 hsl(var(--foreground));
+  }
+
+  .manga-shadow-accent {
+    box-shadow: 6px 6px 0 0 hsl(var(--accent));
+  }
+}
